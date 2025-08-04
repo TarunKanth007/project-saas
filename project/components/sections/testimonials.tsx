@@ -94,7 +94,7 @@ export function Testimonials() {
           transition={{ duration: 0.8 }}
         >
           <img 
-            src="https://i.ibb.co/v6cYQqw4/placeholder.jpg" 
+            src="https://i.ibb.co/h1Ht58Wq/A099701-F-BFF8-4-ACC-94-AB-576669-E87863.jpg" 
             alt="Testimonials" 
             className="rounded-3xl shadow-lg w-full object-cover"
           />
