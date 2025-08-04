@@ -72,7 +72,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref}
+        // This type assertion is the key to fixing the final ref error.
+        // It tells TypeScript to treat the 'ref' as a ForwardedRef,
+        // which is a modern, type-safe ref that is compatible with
+        // both framer-motion and radix-ui's Slot component.
+        ref={ref as React.ForwardedRef<HTMLButtonElement>}
         whileHover={{ scale: variant === "cta" ? 1.05 : 1.02 }}
         whileTap={{ scale: 0.98 }}
         transition={{ type: "spring", stiffness: 400, damping: 17 }}
