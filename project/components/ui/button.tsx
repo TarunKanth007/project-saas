@@ -39,14 +39,15 @@ const buttonVariants = cva(
 
 // We create a new type that omits the conflicting onDrag props from standard button attributes.
 // This ensures no type conflicts with framer-motion's onDrag handler.
-type OmittedOnDragProps = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onDrag' | 'onDragStart' | 'onDragEnd' | 'onDragEnter' | 'onDragLeave' | 'onDragOver' | 'onDrop'>;
+type OmittedButtonProps = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onDrag' | 'onDragStart' | 'onDragEnd' | 'onDragEnter' | 'onDragLeave' | 'onDragOver' | 'onDrop' | 'children'>;
 
 export interface ButtonProps
-  extends OmittedOnDragProps,
+  extends OmittedButtonProps,
     VariantProps<typeof buttonVariants>,
-    HTMLMotionProps<"button"> {
+    Omit<HTMLMotionProps<"button">, 'children'> {
   asChild?: boolean;
   loading?: boolean;
+  children?: React.ReactNode;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
