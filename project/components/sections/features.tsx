@@ -12,7 +12,7 @@ import {
   Users
 } from "lucide-react";
 
-const featuresImage = "https://i.ibb.co/v6cYQqw4/darkened-no-bg-image.png";
+const featuresImage = "https://i.ibb.co/ynhsJBy2/17039-C41-449-D-4-B05-92-DF-09-ED823-A2-C3-B.jpg";
 
 const features = [
   { icon: Brain, title: "AI-Powered Analytics", description: "Advanced machine learning algorithms analyze your campaign data to provide actionable insights and predictions." },
