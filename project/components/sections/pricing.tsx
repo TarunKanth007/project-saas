@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Check, Star } from "lucide-react";
 
 interface PricingProps {
-  onStartTrial: () => void;
+  onStartTrial: (mode: "trial" | "sales") => void;
 }
 
 const plans = [
@@ -63,11 +63,9 @@ const plans = [
 export function Pricing({ onStartTrial }: PricingProps) {
   const handlePlanClick = (planName: string) => {
     if (planName === "Enterprise") {
-      // For enterprise, you might want to handle differently
-      // For now, we'll also open the signup modal
-      onStartTrial();
+      onStartTrial("sales"); // open modal in contact sales mode
     } else {
-      onStartTrial();
+      onStartTrial("trial"); // open modal in trial mode
     }
   };
 
@@ -78,7 +76,7 @@ export function Pricing({ onStartTrial }: PricingProps) {
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.8 }}
         >
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
@@ -100,7 +98,7 @@ export function Pricing({ onStartTrial }: PricingProps) {
               }`}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.2 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
               whileHover={{ y: plan.popular ? 0 : -5 }}
             >
@@ -147,7 +145,7 @@ export function Pricing({ onStartTrial }: PricingProps) {
           className="text-center mt-12"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
           <p className="text-gray-600 text-sm">
