@@ -12,22 +12,17 @@ import { SignupModal } from "@/components/signup-modal";
 export default function Home() {
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
 
-  const handleStartTrial = () => {
-    setIsSignupModalOpen(true);
-  };
-
-  const handleCloseSignup = () => {
-    setIsSignupModalOpen(false);
-  };
+  const handleStartTrial = () => setIsSignupModalOpen(true);
+  const handleCloseSignup = () => setIsSignupModalOpen(false);
 
   return (
     <main className="min-h-screen">
-      <Hero onStartTrial={handleStartTrial} />
-      <Features />
-      <Pricing onStartTrial={handleStartTrial} />
-      <Testimonials />
-      <FAQ />
-      <Footer />
+      <section id="home"><Hero onStartTrial={handleStartTrial} /></section>
+      <section id="features"><Features /></section>
+      <section id="pricing"><Pricing onStartTrial={handleStartTrial} /></section>
+      <section id="testimonials"><Testimonials /></section>
+      <section id="faq"><FAQ /></section>
+      <section id="contact"><Footer /></section>
       
       <SignupModal 
         isOpen={isSignupModalOpen} 
