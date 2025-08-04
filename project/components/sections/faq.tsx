@@ -45,7 +45,7 @@ export function FAQ() {
           transition={{ duration: 0.8 }}
         >
           <img 
-            src="https://i.ibb.co/v6cYQqw4/placeholder.jpg" 
+            src="https://i.ibb.co/DdNYvtt/F3-FD1987-D690-40-BC-816-A-4075-A2755-BC0.jpg" 
             alt="FAQ" 
             className="rounded-3xl shadow-lg w-full object-cover"
           />
