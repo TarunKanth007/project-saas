@@ -16,6 +16,7 @@ const faqs = [
 
 export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const [submittedData, setSubmittedData] = useState({ name: "", question: "" });
@@ -36,22 +37,7 @@ export function FAQ() {
   return (
     <section className="py-24 bg-gray-50">
       <div className="container mx-auto px-4 flex flex-col lg:flex-row items-center gap-12">
-        {/* Image Left with Animation */}
-        <motion.div 
-          className="w-full lg:w-1/3"
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: false, amount: 0.2 }}
-          transition={{ duration: 0.8 }}
-        >
-          <img 
-            src="https://i.ibb.co/DdNYvtt/F3-FD1987-D690-40-BC-816-A-4075-A2755-BC0.jpg" 
-            alt="FAQ" 
-            className="rounded-3xl shadow-lg w-full object-cover"
-          />
-        </motion.div>
-
-        {/* FAQ Right */}
+        {/* FAQ Left (Text Section) */}
         <div className="w-full lg:w-1/2">
           <motion.div 
             className="mb-16 text-center"
@@ -73,11 +59,13 @@ export function FAQ() {
             {faqs.map((faq, index) => (
               <motion.div
                 key={index}
-                className="mb-4"
+                className="mb-4 relative"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: false, amount: 0.2 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
               >
                 <button
                   onClick={() => toggleFAQ(index)}
@@ -94,6 +82,7 @@ export function FAQ() {
                       <ChevronDown className="w-5 h-5 text-gray-500 flex-shrink-0" />
                     </motion.div>
                   </div>
+
                   <AnimatePresence>
                     {openIndex === index && (
                       <motion.div
@@ -110,6 +99,21 @@ export function FAQ() {
                     )}
                   </AnimatePresence>
                 </button>
+
+                {/* Hover Popup */}
+                <AnimatePresence>
+                  {hoveredIndex === index && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute left-0 right-0 mt-2 bg-white shadow-lg rounded-lg p-4 text-sm text-gray-700 z-20"
+                    >
+                      {faq.answer}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </motion.div>
             ))}
           </div>
@@ -127,6 +131,21 @@ export function FAQ() {
             </Button>
           </motion.div>
         </div>
+
+        {/* Image Right */}
+        <motion.div 
+          className="w-full lg:w-1/3"
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.8 }}
+        >
+          <img 
+            src="https://i.ibb.co/DdNYvtt/F3-FD1987-D690-40-BC-816-A-4075-A2755-BC0.jpg" 
+            alt="FAQ" 
+            className="rounded-3xl shadow-lg w-full object-cover"
+          />
+        </motion.div>
       </div>
 
       {/* Support Form Modal */}
@@ -218,7 +237,6 @@ export function FAQ() {
                 </svg>
               </motion.div>
 
-              {/* Title */}
               <h3 className="text-3xl font-bold text-gray-900 mb-4">Congratulations!</h3>
               <p className="text-lg text-gray-700 mb-6">
                 Thank you, <span className="font-semibold">{submittedData.name}</span>! <br />
@@ -226,7 +244,6 @@ export function FAQ() {
               </p>
               <p className="italic text-gray-600 mb-6">"{submittedData.question}"</p>
 
-              {/* Close Button */}
               <Button
                 className="w-full bg-green-600 hover:bg-green-700 text-white text-lg py-3 rounded-lg"
                 onClick={() => setIsSuccessOpen(false)}
